@@ -1,86 +1,66 @@
 import Head from 'next/head';
-import useInteractions from '../api/use-interactions';
-import Interaction from '../components/interaction';
+import {InteractionsProvider} from '../context/interactions-context';
+import InteractionList from '../components/interaction-list';
 
 const Home = () => {
-  const interactions = useInteractions();
-
   return (
-    <div className="container">
-      <Head>
-        <title>Interactions</title>
-      </Head>
+    <InteractionsProvider>
+      <div className="container">
+        <Head>
+          <title>Interactions</title>
+          <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+          />
+        </Head>
 
-      <main>
-        <h1 className="title">Interactions</h1>
-        <div className="interactions-container">
-          {interactions ? (
-            interactions.map((interaction) => (
-              <div className="interaction-item" key={interaction.time}>
-                <Interaction interaction={interaction} />
-              </div>
-            ))
-          ) : (
-            <div>Loading...</div>
-          )}
-        </div>
-      </main>
+        <main>
+          <h1 className="title">Interactions</h1>
+          <InteractionList />
+        </main>
 
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
+        <style jsx>{`
+          .container {
+            min-height: 100vh;
+            padding: 0 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
 
-        main {
-          width: 65%;
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
+          main {
+            width: 65%;
+            padding: 5rem 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
 
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-          text-align: center;
-        }
+          .title {
+            margin: 0;
+            line-height: 1.15;
+            font-size: 4rem;
+            text-align: center;
+          }
+        `}</style>
 
-        .interactions-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          width: 100%;
-          margin-top: 2rem;
-        }
+        <style jsx global>{`
+          html,
+          body {
+            padding: 0;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+              Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+              sans-serif;
+          }
 
-        .interaction-item {
-          width: 100%;
-          margin-top: 1rem;
-          margin-bottom: 1rem;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
+          * {
+            box-sizing: border-box;
+          }
+        `}</style>
+      </div>
+    </InteractionsProvider>
   );
 };
 

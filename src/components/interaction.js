@@ -1,20 +1,28 @@
 import PropTypes from 'prop-types';
 import {format} from 'date-fns';
 
-const Interaction = ({interaction}) => {
+const Interaction = ({interaction, onRemove}) => {
   return (
-    <div className="container">
+    <div className="container" draggable>
       <div className="text-wrapper">
         <div className="title">{interaction.name}</div>
         <div className="type">{interaction.type}</div>
       </div>
       <div>{format(interaction.time, 'dd/LL/yyyy HH:mm:ss')}</div>
+      <i
+        className={['material-icons', 'delete-btn'].join(' ')}
+        role="button"
+        aria-pressed="false"
+        onClick={onRemove}>
+        delete
+      </i>
 
       <style jsx>{`
         .container {
+          display: flex;
+          background-color: #fff;
           border: 1px solid #000;
           border-radius: 8px;
-          display: flex;
           padding: 1rem;
           align-items: center;
         }
@@ -31,6 +39,12 @@ const Interaction = ({interaction}) => {
         .type {
           font-size: 14px;
         }
+
+        .delete-btn {
+          cursor: pointer;
+          user-select: none;
+          margin-left: 0.5rem;
+        }
       `}</style>
     </div>
   );
@@ -39,6 +53,7 @@ const Interaction = ({interaction}) => {
 Interaction.propTypes = {
   // TODO instance of Interaction model
   interaction: PropTypes.object.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 export default Interaction;
