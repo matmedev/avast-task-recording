@@ -3,7 +3,7 @@ import {format} from 'date-fns';
 
 const Interaction = ({interaction, onRemove}) => {
   return (
-    <div className="container" draggable>
+    <div className="container">
       <div className="text-wrapper">
         <div className="title">{interaction.name}</div>
         <div className="type">{interaction.type}</div>
