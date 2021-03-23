@@ -1,2 +1,1 @@
-# avast-task-recording
-Technical task implementation for Avast
+This is a starter template for [Learn Next.js](https://nextjs.org/learn).
