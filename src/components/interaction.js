@@ -5,10 +5,10 @@ const Interaction = ({interaction, onRemove}) => {
   return (
     <div className="container">
       <div className="text-wrapper">
-        <div className="title">{interaction.name}</div>
-        <div className="type">{interaction.type}</div>
+        <div className="title">{interaction.metadata.name}</div>
+        <div className="type">{interaction.metadata.type}</div>
       </div>
-      <div>{format(interaction.time, 'dd/LL/yyyy HH:mm:ss')}</div>
+      <div>{format(interaction.metadata.time, 'dd/LL/yyyy HH:mm:ss')}</div>
       <i
         className={['material-icons', 'delete-btn'].join(' ')}
         role="button"

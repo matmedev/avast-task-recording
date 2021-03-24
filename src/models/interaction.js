@@ -1,14 +1,25 @@
 class Interaction {
-  constructor(time, type, name) {
-    this.time = time;
-    this.type = type;
-    this.name = name;
-  }
+  constructor(record) {
+    Object.assign(this, record);
 
-  static fromResponse(record) {
     const {nodeName, url} = record.setup;
 
-    return new Interaction(record.time, record.event.type, nodeName || url);
+    const time = record.time;
+    const type = record.event.type;
+    const name = nodeName || url;
+
+    const id = type + time + name;
+
+    this._metadata = {
+      time,
+      type,
+      name,
+      id,
+    };
+  }
+
+  get metadata() {
+    return this._metadata;
   }
 }
 

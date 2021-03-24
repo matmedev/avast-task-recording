@@ -16,20 +16,18 @@ const InteractionList = () => {
   };
 
   const drop = (e) => {
-    const draggedInteraction = interactions.find(
-      (i) => i.time === +draggedInteractionId,
+    const dragIndex = interactions.findIndex(
+      (i) => i.metadata.id === draggedInteractionId,
     );
-    const droppedInteraction = interactions.find(
-      (i) => i.time === +e.currentTarget.id,
+    const dropIndex = interactions.findIndex(
+      (i) => i.metadata.id === e.currentTarget.id,
     );
 
+    const draggedInteraction = interactions[dragIndex];
+
     const newInteractions = [...interactions];
-    newInteractions[
-      interactions.indexOf(draggedInteraction)
-    ] = droppedInteraction;
-    newInteractions[
-      interactions.indexOf(droppedInteraction)
-    ] = draggedInteraction;
+    newInteractions.splice(dragIndex, 1);
+    newInteractions.splice(dropIndex, 0, draggedInteraction);
     setInteractions(newInteractions);
   };
 
@@ -39,8 +37,8 @@ const InteractionList = () => {
         interactions.map((interaction) => (
           <div
             className="interaction-item"
-            key={interaction.time}
-            id={interaction.time}
+            key={interaction.metadata.id}
+            id={interaction.metadata.id}
             onDragOver={(e) => e.preventDefault()}
             onDragStart={drag}
             onDrop={drop}
@@ -61,7 +59,6 @@ const InteractionList = () => {
           flex-direction: column;
           align-items: center;
           width: 100%;
-          margin-top: 2rem;
         }
 
         .interaction-item {

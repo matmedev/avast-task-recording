@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import {InteractionsProvider} from '../context/interactions-context';
 import InteractionList from '../components/interaction-list';
+import SaveButton from '../components/save-button';
 
 const Home = () => {
   return (
@@ -16,6 +17,9 @@ const Home = () => {
 
         <main>
           <h1 className="title">Interactions</h1>
+          <div className="button-container">
+            <SaveButton />
+          </div>
           <InteractionList />
         </main>
 
@@ -42,6 +46,12 @@ const Home = () => {
             line-height: 1.15;
             font-size: 4rem;
             text-align: center;
+          }
+
+          .button-container {
+            display: flex;
+            width: 100%;
+            align-items: space-between;
           }
         `}</style>
 
