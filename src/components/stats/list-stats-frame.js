@@ -51,7 +51,7 @@ const ListStatsFrame = ({title, values}) => {
 
 ListStatsFrame.propTypes = {
   title: PropTypes.string.isRequired,
-  values: PropTypes.object.isRequired,
+  values: PropTypes.object,
 };
 
 export default ListStatsFrame;

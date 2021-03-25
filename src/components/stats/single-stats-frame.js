@@ -40,7 +40,7 @@ const SingleStatsFrame = ({title, value}) => {
 
 SingleStatsFrame.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
 };
 
 export default SingleStatsFrame;

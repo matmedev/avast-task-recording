@@ -1,12 +1,16 @@
 import {useInteractions} from '../../context/interactions-context';
 import SingleStatsFrame from './single-stats-frame';
+import {useMemo} from 'react';
 
 const TotalTime = () => {
   const [interactions] = useInteractions();
 
-  const total =
-    interactions?.[interactions?.length - 1].metadata.time -
-    interactions?.[0].metadata.time;
+  const total = useMemo(
+    () =>
+      interactions?.[interactions?.length - 1].metadata.time -
+      interactions?.[0].metadata.time,
+    [interactions],
+  );
 
   return (
     <SingleStatsFrame
