@@ -1,25 +1,31 @@
 import {InteractionsProvider} from '../context/interactions-context';
-import InteractionList from '../components/interactions/interaction-list';
-import SaveButton from '../components/interactions/save-button';
 import InteractionsHead from '../components/common/interactions-head';
 import GlobalStyles from '../styles/global';
 import Link from 'next/link';
+import InteractionsPerType from '../components/stats/interactions-per-type';
+import TimeBetweenInteractions from '../components/stats/time-between-interactions';
+import InputSequence from '../components/stats/input-sequence';
+import TotalTime from '../components/stats/total-time';
 
-const Home = () => {
+const Stats = () => {
   return (
     <InteractionsProvider>
       <div className="container">
-        <InteractionsHead title="Interactions" />
+        <InteractionsHead title="Stats" />
 
         <main>
-          <h1 className="title">Interactions</h1>
+          <h1 className="title">Stats</h1>
           <div className="button-container">
-            <SaveButton />
-            <Link href="/stats">
-              <a>{`stats >`}</a>
+            <Link href="/">
+              <a>{`< interactions`}</a>
             </Link>
           </div>
-          <InteractionList />
+          <div className="stats-grid">
+            <InteractionsPerType />
+            <TimeBetweenInteractions />
+            <InputSequence />
+            <TotalTime />
+          </div>
         </main>
 
         <style jsx>{`
@@ -50,7 +56,15 @@ const Home = () => {
           .button-container {
             display: flex;
             width: 100%;
-            justify-content: space-between;
+            align-items: space-between;
+          }
+
+          .stats-grid {
+            width: 100%;
+            margin-top: 2rem;
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
           }
         `}</style>
         <GlobalStyles />
@@ -59,4 +73,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Stats;

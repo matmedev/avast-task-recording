@@ -1,4 +1,4 @@
-import {useInteractions} from '../context/interactions-context';
+import {useInteractions} from '../../context/interactions-context';
 import Interaction from './interaction';
 import {useState} from 'react';
 
