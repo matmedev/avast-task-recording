@@ -1,5 +1,5 @@
 import {useInteractions} from '../../context/interactions-context';
-import StatsFrame from './stats-frame';
+import ListStatsFrame from './list-stats-frame';
 
 const TimeBetweenInteractions = () => {
   const [interactions] = useInteractions();
@@ -11,38 +11,18 @@ const TimeBetweenInteractions = () => {
   });
   times?.splice(times.length - 1, 1);
 
-  const min = Math.min(...(times ?? []));
-  const max = Math.max(...(times ?? []));
-  const mean = times?.reduce((acc, t) => acc + t, 0) / times?.length;
+  const timesObj = times
+    ? {
+        min: Math.min(...times) + ' ms',
+        max: Math.max(...times) + ' ms',
+        mean:
+          (times.reduce((acc, t) => acc + t, 0) / times.length).toFixed(4) +
+          ' ms',
+      }
+    : null;
 
   return (
-    <>
-      <StatsFrame title="Times between interactions">
-        <div className="container">
-          <div className="entry-key">MIN</div>
-          <div className="entry-value">{min} ms</div>
-          <div className="entry-key">MAX</div>
-          <div className="entry-value">{max} ms</div>
-          <div className="entry-key">MEAN</div>
-          <div className="entry-value">{mean.toFixed(4)} ms</div>
-        </div>
-      </StatsFrame>
-      <style jsx>{`
-        .container {
-          display: grid;
-          grid-template-columns: repeat(2, auto);
-          row-gap: 0.3rem;
-        }
-
-        .entry-key {
-          font-weight: bold;
-        }
-
-        .entry-value {
-          text-align: right;
-        }
-      `}</style>
-    </>
+    <ListStatsFrame values={timesObj} title="Times between interactions" />
   );
 };
 

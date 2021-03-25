@@ -1,5 +1,5 @@
 import {useInteractions} from '../../context/interactions-context';
-import StatsFrame from './stats-frame';
+import ListStatsFrame from './list-stats-frame';
 
 const InteractionsPerType = () => {
   const [interactions] = useInteractions();
@@ -11,40 +11,7 @@ const InteractionsPerType = () => {
     };
   }, {});
 
-  return (
-    <>
-      <StatsFrame title="Interactions Per Type">
-        <div className="container">
-          {values &&
-            Object.entries(values).map(([key, value]) => (
-              <>
-                <div key={`key-${key}`} className="entry-key">
-                  {key}
-                </div>
-                <div key={`val-${key}`} className="entry-value">
-                  {value}
-                </div>
-              </>
-            ))}
-        </div>
-      </StatsFrame>
-      <style jsx>{`
-        .container {
-          display: grid;
-          grid-template-columns: repeat(2, auto);
-          row-gap: 0.3rem;
-        }
-
-        .entry-key {
-          font-weight: bold;
-        }
-
-        .entry-value {
-          text-align: right;
-        }
-      `}</style>
-    </>
-  );
+  return <ListStatsFrame values={values} title="Interactions Per Type" />;
 };
 
 export default InteractionsPerType;

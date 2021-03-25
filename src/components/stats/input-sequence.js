@@ -1,5 +1,5 @@
-import StatsFrame from './stats-frame';
 import {useInteractions} from '../../context/interactions-context';
+import SingleStatsFrame from './single-stats-frame';
 
 const InputSequence = () => {
   const [interactions] = useInteractions();
@@ -21,29 +21,13 @@ const InputSequence = () => {
       [0],
     );
 
-  const value = Math.max(...(groups ?? []));
+  const value = groups ? Math.max(...groups) : null;
 
   return (
-    <>
-      <StatsFrame title="Longest sequence of input events">
-        <div className="container">
-          <div className="value">{value}</div>
-        </div>
-      </StatsFrame>
-      <style jsx>{`
-        .container {
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 32px;
-        }
-
-        .value {
-          font-weight: bold;
-        }
-      `}</style>
-    </>
+    <SingleStatsFrame
+      title="Longest sequence of input events"
+      value={value && value + ''}
+    />
   );
 };
 

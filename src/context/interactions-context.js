@@ -17,7 +17,7 @@ export const InteractionsProvider = (props) => {
 
   useEffect(() => {
     if (!interactions) {
-      // setInteractions(fetchedInteractions);
+      setInteractions(fetchedInteractions);
     }
   }, [fetchedInteractions]);
 

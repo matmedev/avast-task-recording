@@ -1,5 +1,5 @@
 import {useInteractions} from '../../context/interactions-context';
-import StatsFrame from './stats-frame';
+import SingleStatsFrame from './single-stats-frame';
 
 const TotalTime = () => {
   const [interactions] = useInteractions();
@@ -9,26 +9,10 @@ const TotalTime = () => {
     interactions?.[0].metadata.time;
 
   return (
-    <>
-      <StatsFrame title="Total time of interactions">
-        <div className="container">
-          <div className="value">{total} ms</div>
-        </div>
-      </StatsFrame>
-      <style jsx>{`
-        .container {
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 32px;
-        }
-
-        .value {
-          font-weight: bold;
-        }
-      `}</style>
-    </>
+    <SingleStatsFrame
+      title="Total time of interactions"
+      value={total && `${total} ms`}
+    />
   );
 };
 
