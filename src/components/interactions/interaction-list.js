@@ -1,48 +1,37 @@
+import {useMemo} from 'react';
+import PropTypes from 'prop-types';
 import {useInteractions} from '../../context/interactions-context';
 import Interaction from './interaction';
-import {useState} from 'react';
+import {ascending, descending} from '../../utils/sort';
 
-const InteractionList = () => {
-  const [draggedInteractionId, setDraggedInteractionId] = useState(null);
-
+const InteractionList = ({ordering}) => {
   const [interactions, setInteractions] = useInteractions();
 
+  const orderedInteractions = useMemo(() => {
+    if (interactions) {
+      const ordered = [...interactions];
+      if (ordering === 'asc') {
+        ordered.sort(ascending);
+      } else {
+        ordered.sort(descending);
+      }
+      return ordered;
+    } else {
+      return null;
+    }
+  }, [interactions, ordering]);
+
   const removeInteraction = (interaction) => {
-    setInteractions(interactions.filter((i) => i !== interaction));
-  };
-
-  const drag = (e) => {
-    setDraggedInteractionId(e.currentTarget.id);
-  };
-
-  const drop = (e) => {
-    const dragIndex = interactions.findIndex(
-      (i) => i.metadata.id === draggedInteractionId,
-    );
-    const dropIndex = interactions.findIndex(
-      (i) => i.metadata.id === e.currentTarget.id,
-    );
-
-    const draggedInteraction = interactions[dragIndex];
-
-    const newInteractions = [...interactions];
-    newInteractions.splice(dragIndex, 1);
-    newInteractions.splice(dropIndex, 0, draggedInteraction);
-    setInteractions(newInteractions);
+    if (window.confirm('Do you really want to remove this interaction?')) {
+      setInteractions(interactions.filter((i) => i !== interaction));
+    }
   };
 
   return (
     <div className="interactions-container">
-      {interactions ? (
-        interactions.map((interaction) => (
-          <div
-            className="interaction-item"
-            key={interaction.metadata.id}
-            id={interaction.metadata.id}
-            onDragOver={(e) => e.preventDefault()}
-            onDragStart={drag}
-            onDrop={drop}
-            draggable>
+      {orderedInteractions ? (
+        orderedInteractions.map((interaction) => (
+          <div className="interaction-item" key={interaction.metadata.id}>
             <Interaction
               interaction={interaction}
               onRemove={() => removeInteraction(interaction)}
@@ -65,11 +54,14 @@ const InteractionList = () => {
           width: 100%;
           margin-top: 1rem;
           margin-bottom: 1rem;
-          cursor: move;
         }
       `}</style>
     </div>
   );
+};
+
+InteractionList.propTypes = {
+  ordering: PropTypes.string.isRequired,
 };
 
 export default InteractionList;

@@ -4,8 +4,15 @@ import SaveButton from '../components/interactions/save-button';
 import InteractionsHead from '../components/common/interactions-head';
 import GlobalStyles from '../styles/global';
 import Link from 'next/link';
+import {useState} from 'react';
 
 const Home = () => {
+  const [ordering, setOrdering] = useState('asc');
+
+  const toggleOrdering = () => {
+    setOrdering(ordering === 'asc' ? 'desc' : 'asc');
+  };
+
   return (
     <InteractionsProvider>
       <div className="container">
@@ -15,11 +22,14 @@ const Home = () => {
           <h1 className="title">Interactions</h1>
           <div className="button-container">
             <SaveButton />
+            <button type="button" onClick={toggleOrdering}>
+              {ordering === 'asc' ? 'v ASC' : '^ DESC'}
+            </button>
             <Link href="/stats">
               <a>{`stats >`}</a>
             </Link>
           </div>
-          <InteractionList />
+          <InteractionList ordering={ordering} />
         </main>
 
         <style jsx>{`
