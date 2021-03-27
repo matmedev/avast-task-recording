@@ -9,10 +9,10 @@ const ListStatsFrame = ({title, values}) => {
           <div className="container">
             {Object.entries(values).map(([key, value]) => (
               <>
-                <div key={`key-${key}`} className="entry-key">
+                <div className="entry entry-key" title={key} key={`key-${key}`}>
                   {key}
                 </div>
-                <div key={`val-${key}`} className="entry-value">
+                <div className="entry entry-value" key={`val-${key}`}>
                   {value}
                 </div>
               </>
@@ -26,7 +26,14 @@ const ListStatsFrame = ({title, values}) => {
         .container {
           display: grid;
           grid-template-columns: repeat(2, auto);
-          row-gap: 0.3rem;
+          gap: 0.3rem;
+        }
+
+        .entry {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          max-width: 100%;
         }
 
         .entry-key {

@@ -6,6 +6,7 @@ import InteractionsPerType from '../components/stats/interactions-per-type';
 import TimeBetweenInteractions from '../components/stats/time-between-interactions';
 import InputSequence from '../components/stats/input-sequence';
 import TotalTime from '../components/stats/total-time';
+import InteractionsPerTargets from '../components/stats/interactions-per-targets';
 
 const Stats = () => {
   return (
@@ -25,6 +26,7 @@ const Stats = () => {
             <TimeBetweenInteractions />
             <InputSequence />
             <TotalTime />
+            <InteractionsPerTargets />
           </div>
         </main>
 
