@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import {format} from 'date-fns';
+import InteractionModel from '../../models/interaction';
 
 const Interaction = ({interaction, onRemove}) => {
   return (
@@ -51,8 +52,7 @@ const Interaction = ({interaction, onRemove}) => {
 };
 
 Interaction.propTypes = {
-  // TODO instance of Interaction model
-  interaction: PropTypes.object.isRequired,
+  interaction: PropTypes.instanceOf(InteractionModel).isRequired,
   onRemove: PropTypes.func.isRequired,
 };
 
