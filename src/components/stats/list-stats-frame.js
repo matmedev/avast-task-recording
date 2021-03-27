@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import StatsFrame from './stats-frame';
 
@@ -8,14 +9,12 @@ const ListStatsFrame = ({title, values}) => {
         {values ? (
           <div className="container">
             {Object.entries(values).map(([key, value]) => (
-              <>
-                <div className="entry entry-key" title={key} key={`key-${key}`}>
+              <React.Fragment key={key}>
+                <div className="entry entry-key" title={key}>
                   {key}
                 </div>
-                <div className="entry entry-value" key={`val-${key}`}>
-                  {value}
-                </div>
-              </>
+                <div className="entry entry-value">{value}</div>
+              </React.Fragment>
             ))}
           </div>
         ) : (

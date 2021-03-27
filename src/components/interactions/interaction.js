@@ -11,7 +11,7 @@ const Interaction = ({interaction, onRemove}) => {
       </div>
       <div>{format(interaction.metadata.time, 'dd/LL/yyyy HH:mm:ss')}</div>
       <i
-        className={['material-icons', 'delete-btn'].join(' ')}
+        className="material-icons delete-btn"
         role="button"
         aria-pressed="false"
         onClick={onRemove}>

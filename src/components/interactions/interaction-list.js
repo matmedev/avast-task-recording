@@ -10,11 +10,7 @@ const InteractionList = ({ordering}) => {
   const orderedInteractions = useMemo(() => {
     if (interactions) {
       const ordered = [...interactions];
-      if (ordering === 'asc') {
-        ordered.sort(ascending);
-      } else {
-        ordered.sort(descending);
-      }
+      ordered.sort(ordering === 'asc' ? ascending : descending);
       return ordered;
     } else {
       return null;

@@ -7,8 +7,10 @@ const TotalTime = () => {
 
   const total = useMemo(
     () =>
-      interactions?.[interactions?.length - 1].metadata.time -
-      interactions?.[0].metadata.time,
+      interactions
+        ? interactions[interactions?.length - 1].metadata.time -
+          interactions[0].metadata.time
+        : null,
     [interactions],
   );
 
